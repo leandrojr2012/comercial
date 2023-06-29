@@ -12,7 +12,7 @@ async function registerEmployee(funcionarioNome, funcionarioSobrenome, funcionar
         }
         else{   
             const senhas = bcryptjs.hashSync(funcionarioSenha, 8)
-            await db.insert({funcionarioNome, funcionarioSobrenome, funcionarioDataNascimento, funcionarioRg, funcionarioCpf, funcionarioEndereco, funcionarioAdmissao, funcionarioDemissao, funcionarioSalario, funcionarioFuncao, funcionarioSenha:senhas})
+            await db.insert({funcionarioNome, funcionarioSobrenome, funcionarioDataNascimento, funcionarioRg:Number(funcionarioRg), funcionarioCpf:Number(funcionarioCpf), funcionarioEndereco, funcionarioAdmissao, funcionarioDemissao, funcionarioSalario:Number(funcionarioSalario), funcionarioFuncao, funcionarioSenha:senhas})
             .into("funcionario")
             .then (data =>{
                 resolve()
