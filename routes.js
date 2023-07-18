@@ -21,7 +21,8 @@ route.get('/home/product/register', eAdmin, productcontroller.product)
 route.get('/home/product/views', eAdmin, productviewscontroller.productviews)
 route.get('/home/product/entry', eAdmin, productEntrycontroller.productEntry)
 route.get('/home/supplier', eAdmin, suppliercontroller.supplier)
-route.get('/home/saleclient', salescontroller.saleclient)
+route.get('/home/saleclient/', eAdmin, salescontroller.saleclient)
+route.get('/home/saleclient/:codigo', eAdmin, salescontroller.saleclientcodigo)
 
 //ROUTES POST
 route.post('/registerservice', registercontroller.registerservice)
