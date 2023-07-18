@@ -43,8 +43,10 @@
 
     fetch("http://localhost:8080/home/saleclient?", {
     }).then(response =>{  response.json()
-                      console.log(response)
-    }).catch((error)=>{console.error(error)})
+        .then(data => {
+                      console.log(data)
+                })
+    }).catch((error)=>{console.log(error)})
     }
 </script>
 </html>
