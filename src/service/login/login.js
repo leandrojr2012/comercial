@@ -43,7 +43,7 @@ async function loginUsuario(nome, senha){
         }
         else{            
             let token = jwt.sign({idBd}, SECRET, {
-            expiresIn: 60
+            expiresIn: 6000
             })
             await db.insert({idBd, data})
             .into("login")

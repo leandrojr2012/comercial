@@ -1,4 +1,4 @@
-const registerEmployee = require('../../service/register/registerEmployee')
+const registerEmployee = require('../../service/registerUser/registerEmployee')
 
 exports.register = (req, res) => {
     res.render('register')
@@ -18,8 +18,9 @@ exports.registerservice = (req, res) => {
     const funcionarioFuncao = dados.funcao
     const funcionarioSenha = dados.senha
     const confSenha = dados.confirmarsenha
+    const funcionarioCondicao = dados.condicao
 
-    registerEmployee(funcionarioNome, funcionarioSobrenome, funcionarioDataNascimento, funcionarioRg, funcionarioCpf, funcionarioEndereco, funcionarioAdmissao, funcionarioDemissao, funcionarioSalario, funcionarioFuncao, funcionarioSenha, confSenha)
+    registerEmployee(funcionarioNome, funcionarioSobrenome, funcionarioDataNascimento, funcionarioRg, funcionarioCpf, funcionarioEndereco, funcionarioAdmissao, funcionarioDemissao, funcionarioSalario, funcionarioFuncao, funcionarioSenha, confSenha, funcionarioCondicao)
     .then(()=>{
         return res.redirect('/home') 
     }).catch((erros) => {console.log(erros)

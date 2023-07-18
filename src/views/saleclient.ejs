@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>REGISTER</title>
+</head>
+<body>
+    <div>
+        <h1>SALES</h1>
+    </div>
+
+    <div>
+        <form action="/saleinfoservice" method="post">
+            
+            <input type="number" placeholder="CODIGO" name="codigo"><br>
+            <input type="number" placeholder="QUANTIDADE" name="quantidade"><br>
+
+            <div class="conteinerBotao">
+                <button type="button" class="btn btn-success" onclick="adicionar(document.getElementsByName('codigo').value, 
+                document.getElementsByName('quantidade').value)">ADD</button>
+            </div>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2">Descrição:
+                            <div>
+                                <input type="hidden">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit">enviar</button>
+        </form>
+    </div>
+</body>
+<script>
+    function adicionar(codigo, quantidade){
+
+    fetch("http://localhost:8080/home/saleclient?", {
+    }).then(response =>{  response.json()
+                      console.log(response)
+    }).catch((error)=>{console.error(error)})
+    }
+</script>
+</html>

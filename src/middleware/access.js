@@ -1,15 +1,17 @@
 const Jwt = require('jsonwebtoken')
+const db = require('../db/dataBase')
 
-function eAdmin(req, res, next){
+async function  eFunc(req, res, next){
     try {
         let decoded = Jwt.verify(req.session.token, 'leandro');
+
         if(decoded){
-           // res.locals.usuarioLogado = decoded.idBd
             next()
         }
     } catch (e) {
-        res.redirect('/login')
+        console.log(e)
+        res.redirect('/')
     }
 }
     
-module.exports = eAdmin
+module.exports = eFunc
