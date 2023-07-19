@@ -15,12 +15,15 @@
     <div>
         <form action="/saleinfoservice" method="post">
             
-            <input type="number" placeholder="CODIGO" id="codigo"><br>
-            <input type="number" placeholder="QUANTIDADE" id="quantidade"><br>
+            <input type="number" placeholder="CODIGO" name="codigo"><br>
+            <input type="number" placeholder="QUANTIDADE" name="quantidade"><br>
 
             <div class="conteinerBotao">
                 <button type="button" class="btn btn-success" onclick="adicionar(document.getElementsByName('codigo').value, 
                 document.getElementsByName('quantidade').value)">ADD</button>
+            </div>
+            <div>
+                <%= console.log(codigo) %>
             </div>
 
             <table>
@@ -40,6 +43,8 @@
 </body>
 <script>
     function adicionar(codigo, quantidade){
+
+        console.log('codigo: ' + codigo)
 
     fetch(`http://localhost:8080/home/saleclient/${codigo}?`, {
     }).then(response =>{  

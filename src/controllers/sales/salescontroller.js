@@ -17,12 +17,12 @@ exports.saleclient = async (req, res) => {
 
 exports.saleclientcodigo = async (req, res) => {
 
+    const codigo = req.params.codigo
 
     const rowsProd = await db. select('idproduto', 'produtoNome', 'produtoValorVenda')
                    . from('produto')
-                   .where({idproduto:codigo})
+                   . where({idproduto:codigo})
 
-    const codigo = req.params.codigo
 
     res.send({rowsProd, codigo})
 }
