@@ -78,6 +78,11 @@
         let td_valorUnit = tr.insertCell()
         let td_valor = tr.insertCell()
         let td_total = tr.insertCell()
+        let input = document.createElement('input')
+        input.setAttribute("type", "text")
+        input.setAttribute("id", "nomeHidden")
+        td_nome.appendChild(input)
+
 
         vendas.push({       nome: data.rowsProd[0].produtoNome, 
                             quantidade:quantidade, 
@@ -108,6 +113,7 @@
         }
 
         td_total.innerText = total
+
 
         })
     }).catch((error)=>{console.log(error)})
