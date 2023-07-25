@@ -31,6 +31,7 @@ route.post('/productservice', productcontroller.productservice)
 route.post('/productEntryService', productEntrycontroller.productEntryService)
 route.post('/supplierservice', suppliercontroller.supplierservice)
 route.post('/saleproductservice', salescontroller.saleproductservice)
+route.post('/saleinfoservice', salescontroller.saleinfoservice)
 
 //ROUTES UPDATE
 

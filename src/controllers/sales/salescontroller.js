@@ -1,16 +1,11 @@
 const db = require('../../db/dataBase')
 const saleProductService = require('../../service/sale/saleProductService')
+const saleInfoService = require('../../service/sale/saleinfoservice')
 
 
 exports.saleclient = async (req, res) => {
     const rowsProd = await db. select('idproduto', 'produtoNome', 'produtoValorVenda')
                    . from('produto')
-
-    /*const rowsEmployer = await db. select('idfuncionario', 'funcionarioNome') 
-                           . from('funcionario')
-
-    const rows = await db. select('vendaProdutoIdProduto', 'vendaProdutoQuantidade')
-                            . from('vendasproduto')*/
 
     res.render('saleclient',{rowsProd})
 }
@@ -41,3 +36,18 @@ exports.saleproductservice = (req, res) => {
         return res.redirect('/home')
     })
 }
+
+exports.saleinfoservice = (req, res) => {
+
+    const dados = req.body
+    const nome = dados.inputtable
+
+    saleInfoService(nome)
+    .then(()=>{
+        return res.render('saleclient')
+    }).catch((erros) => {console.log(erros)
+        //error_msg = erros
+        return res.redirect('/home')
+    })
+}
+

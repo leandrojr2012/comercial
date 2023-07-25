@@ -15,44 +15,104 @@
     <div>
         <form action="/saleinfoservice" method="post">
             
-            <input type="number" placeholder="CODIGO" name="codigo"><br>
-            <input type="number" placeholder="QUANTIDADE" name="quantidade"><br>
+            <input type="number" placeholder="CODIGO" id="codigo"><br>
+            <input type="number" placeholder="QUANTIDADE" id="quantidade"><br>
 
             <div class="conteinerBotao">
-                <button type="button" class="btn btn-success" onclick="adicionar(document.getElementsByName('codigo').value, 
-                document.getElementsByName('quantidade').value)">ADD</button>
-            </div>
-            <div>
-                <%= console.log(codigo) %>
+                <button type="button" class="btn btn-success" onclick="adicionar(document.getElementById('codigo').value, 
+                document.getElementById('quantidade').value)">ADD</button>
             </div>
 
-            <table>
-                <tbody>
+            <div>
+                
+            </div>
+
+            <table border="1">
+                <tbody id="tbody">
                     <tr>
-                        <td colspan="2">Descrição:
-                            <div>
-                                <input type="hidden">
-                            </div>
+                        <td >Descrição
+                        </td>
+                        <td>QTD
+                        </td>
+                        <td>Valor Unitario
+                        </td>
+                        <td>Valor
+                        </td>
+                        <td>Total
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <label for="">Logado:</label>
+            <input type="text" name="nome"><br>
+            <label for="">digitado por:</label>
+            <input type="text" name="nome"><br>
             <button type="submit">enviar</button>
         </form>
     </div>
 </body>
 <script>
+
+   /* function lerdados(){
+        document.getElementById('qnt')
+    }*/
+
+    let vendas = []
+
     function adicionar(codigo, quantidade){
 
-        console.log('codigo: ' + codigo)
+    //lerdados()
 
     fetch(`http://localhost:8080/home/saleclient/${codigo}?`, {
     }).then(response =>{  
         return response.json()
         .then(data =>{
             console.log(data)
+
+
+            
+        let tbody = document.getElementById('tbody')
+        let tr = tbody.insertRow()
+        let td_nome = tr.insertCell()
+        let td_quantidade = tr.insertCell()
+        let td_valorUnit = tr.insertCell()
+        let td_valor = tr.insertCell()
+        let td_total = tr.insertCell()
+
+        vendas.push({       nome: data.rowsProd[0].produtoNome, 
+                            quantidade:quantidade, 
+                            valorUnit:data.rowsProd[0].produtoValorVenda, 
+                            valor:data.rowsProd[0].produtoValorVenda * quantidade
+                            })
+
+
+        for (let i in vendas){
+            td_nome.innerText = vendas[i].nome
+        }
+
+        for(let i in vendas){
+            td_quantidade.innerText = vendas[i].quantidade
+        }
+
+        for(let i in vendas){
+            td_valorUnit.innerText = vendas[i].valorUnit
+        }
+
+        for(let i in vendas){
+            td_valor.innerText = vendas[i].valor
+        }
+
+        var total = vendas.reduce(getTotal, 0);
+        function getTotal(total, item) {
+        return total + (item.valorUnit * item.quantidade);
+        }
+
+        td_total.innerText = total
+
         })
     }).catch((error)=>{console.log(error)})
+
     }
+
 </script>
 </html>
