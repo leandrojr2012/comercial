@@ -13,7 +13,7 @@
     </div>
 
     <div>
-        <form action="/saleinfoservice" method="post">
+        <form action="/saleproductservice" method="POST">
             
             <input type="number" placeholder="CODIGO" id="codigo"><br>
             <input type="number" placeholder="QUANTIDADE" id="quantidade"><br>
@@ -21,10 +21,6 @@
             <div class="conteinerBotao">
                 <button type="button" class="btn btn-success" onclick="adicionar(document.getElementById('codigo').value, 
                 document.getElementById('quantidade').value)">ADD</button>
-            </div>
-
-            <div>
-                
             </div>
 
             <table border="1">
@@ -43,29 +39,18 @@
                     </tr>
                 </tbody>
             </table>
-            <label for="">Vendedor:</label>
-            <select name="vendedor">
-                <% for(let i in rowsVendedor){ %>
-                <option value="<%= rowsVendedor[i].idfuncionario %>"><%= rowsVendedor[i].funcionarioNome %></option>
-                <% } %>
-            </select><br>
 
-            <p>TOTAL = </p><input type="hidden" id="total"></p>
+
+            <p>TOTAL = </p><p id="total"></p>
             <button type="submit">enviar</button>
         </form>
     </div>
 </body>
 <script>
 
-   /* function lerdados(){
-        document.getElementById('qnt')
-    }*/
-
     let vendas = []
 
     function adicionar(codigo, quantidade){
-
-    //lerdados()
 
     fetch(`http://localhost:8080/home/saleclient/${codigo}?`, {
     }).then(response =>{  
@@ -115,29 +100,38 @@
         for (let i in vendas){
             td_cod.innerText = vendas[i].cod
             td_nome.appendChild(inputCod)
+            inputCod.setAttribute("value", vendas[i].cod)
+
         }
 
         for (let i in vendas){
             td_nome.innerText = vendas[i].nome
             td_nome.appendChild(inputNome)
+            inputNome.setAttribute("value", vendas[i].nome)
+
 
         }
 
         for(let i in vendas){
             td_quantidade.innerText = vendas[i].quantidade
             td_quantidade.appendChild(inputQuantidade)
-
+            inputQuantidade.setAttribute("value", vendas[i].quantidade)
+        
         }
 
         for(let i in vendas){
             td_valorUnit.innerText = vendas[i].valorUnit
             td_valorUnit.appendChild(inputValorUnit)
+            inputValorUnit.setAttribute("value", vendas[i].valorUnit)
+
 
         }
 
         for(let i in vendas){
             td_valor.innerText = vendas[i].valor
             td_valor.appendChild(inputValor)
+            inputValor.setAttribute("value", vendas[i].valor)
+
 
         }
 
@@ -156,6 +150,6 @@
     }).catch((error)=>{console.log(error)})
 
     }
-
+    
 </script>
 </html>

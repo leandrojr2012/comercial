@@ -1,6 +1,5 @@
 const db = require('../../db/dataBase')
 const saleProductService = require('../../service/sale/saleProductService')
-const saleInfoService = require('../../service/sale/saleinfoservice')
 
 
 exports.saleclient = async (req, res) => {
@@ -27,26 +26,17 @@ exports.saleclientcodigo = async (req, res) => {
 exports.saleproductservice = (req, res) => {
 
     const dados = req.body
-    const vendasProdutoIdProduto = dados.produto
-    const vendasProdutoQuantidade = dados.quantidade 
+    const vendasProdutoTesteNome = dados.prodNome
+    const vendasProdutoTesteQtd = dados.prodQtd
 
-    saleProductService(vendasProdutoIdProduto, vendasProdutoQuantidade)
-    .then(()=>{
-        return res.render('saleclient')
-    }).catch((erros) => {console.log(erros)
-        //error_msg = erros
-        return res.redirect('/home')
-    })
-}
-
-exports.saleinfoservice = (req, res) => {
-
-    const dados = req.body
-    const vendasProdCod = dados.prodCod
 
     console.log(dados)
 
-    saleInfoService(vendasProdCod)
+    console.log(vendasProdutoTesteNome)
+    console.log(vendasProdutoTesteQtd)
+
+
+    saleProductService(vendasProdutoTesteNome, vendasProdutoTesteQtd)
     .then(()=>{
         return res.render('saleclient')
     }).catch((erros) => {console.log(erros)
@@ -54,4 +44,5 @@ exports.saleinfoservice = (req, res) => {
         return res.redirect('/home')
     })
 }
+
 
