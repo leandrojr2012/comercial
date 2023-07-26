@@ -6,8 +6,11 @@ const saleInfoService = require('../../service/sale/saleinfoservice')
 exports.saleclient = async (req, res) => {
     const rowsProd = await db. select('idproduto', 'produtoNome', 'produtoValorVenda')
                    . from('produto')
+    
+    const rowsVendedor = await db. select('funcionarioNome', 'idfuncionario')
+                   . from('funcionario')
 
-    res.render('saleclient',{rowsProd})
+    res.render('saleclient',{rowsProd, rowsVendedor})
 }
 
 exports.saleclientcodigo = async (req, res) => {
@@ -17,7 +20,6 @@ exports.saleclientcodigo = async (req, res) => {
     const rowsProd = await db. select('idproduto', 'produtoNome', 'produtoValorVenda')
                    . from('produto')
                    . where({idproduto:codigo})
-
 
     res.send({rowsProd, codigo})
 }
@@ -40,9 +42,11 @@ exports.saleproductservice = (req, res) => {
 exports.saleinfoservice = (req, res) => {
 
     const dados = req.body
-    const nome = dados.inputtable
+    const vendasProdCod = dados.prodCod
 
-    saleInfoService(nome)
+    console.log(dados)
+
+    saleInfoService(vendasProdCod)
     .then(()=>{
         return res.render('saleclient')
     }).catch((erros) => {console.log(erros)

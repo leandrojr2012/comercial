@@ -30,6 +30,8 @@
             <table border="1">
                 <tbody id="tbody">
                     <tr>
+                        <td>COD
+                        </td>
                         <td >Descrição
                         </td>
                         <td>QTD
@@ -38,15 +40,17 @@
                         </td>
                         <td>Valor
                         </td>
-                        <td>Total
-                        </td>
                     </tr>
                 </tbody>
             </table>
-            <label for="">Logado:</label>
-            <input type="text" name="nome"><br>
-            <label for="">digitado por:</label>
-            <input type="text" name="nome"><br>
+            <label for="">Vendedor:</label>
+            <select name="vendedor">
+                <% for(let i in rowsVendedor){ %>
+                <option value="<%= rowsVendedor[i].idfuncionario %>"><%= rowsVendedor[i].funcionarioNome %></option>
+                <% } %>
+            </select><br>
+
+            <p>TOTAL = </p><input type="hidden" id="total"></p>
             <button type="submit">enviar</button>
         </form>
     </div>
@@ -73,18 +77,35 @@
             
         let tbody = document.getElementById('tbody')
         let tr = tbody.insertRow()
+        let td_cod = tr.insertCell()
         let td_nome = tr.insertCell()
         let td_quantidade = tr.insertCell()
         let td_valorUnit = tr.insertCell()
-        let td_valor = tr.insertCell()
-        let td_total = tr.insertCell()
-        let input = document.createElement('input')
-        input.setAttribute("type", "text")
-        input.setAttribute("id", "nomeHidden")
-        td_nome.appendChild(input)
+        let td_valor = tr.insertCell() 
+
+        let inputCod = document.createElement('input')
+        inputCod.setAttribute("type", "hidden")
+        inputCod.setAttribute("name", "prodCod[]")
+
+        let inputNome = document.createElement('input')
+        inputNome.setAttribute("type", "hidden")
+        inputNome.setAttribute("name", "prodNome[]")
+
+        let inputQuantidade = document.createElement('input')
+        inputQuantidade.setAttribute("type", "hidden")
+        inputQuantidade.setAttribute("name", "prodQtd[]")
+
+        let inputValorUnit = document.createElement('input')
+        inputValorUnit.setAttribute("type", "hidden")
+        inputValorUnit.setAttribute("name", "prodVU[]")
+
+        let inputValor = document.createElement('input')
+        inputValor.setAttribute("type", "hidden")
+        inputValor.setAttribute("name", "prodValor[]")  
 
 
-        vendas.push({       nome: data.rowsProd[0].produtoNome, 
+        vendas.push({       cod:data.rowsProd[0].idproduto,
+                            nome:data.rowsProd[0].produtoNome, 
                             quantidade:quantidade, 
                             valorUnit:data.rowsProd[0].produtoValorVenda, 
                             valor:data.rowsProd[0].produtoValorVenda * quantidade
@@ -92,19 +113,32 @@
 
 
         for (let i in vendas){
+            td_cod.innerText = vendas[i].cod
+            td_nome.appendChild(inputCod)
+        }
+
+        for (let i in vendas){
             td_nome.innerText = vendas[i].nome
+            td_nome.appendChild(inputNome)
+
         }
 
         for(let i in vendas){
             td_quantidade.innerText = vendas[i].quantidade
+            td_quantidade.appendChild(inputQuantidade)
+
         }
 
         for(let i in vendas){
             td_valorUnit.innerText = vendas[i].valorUnit
+            td_valorUnit.appendChild(inputValorUnit)
+
         }
 
         for(let i in vendas){
             td_valor.innerText = vendas[i].valor
+            td_valor.appendChild(inputValor)
+
         }
 
         var total = vendas.reduce(getTotal, 0);
@@ -112,7 +146,10 @@
         return total + (item.valorUnit * item.quantidade);
         }
 
-        td_total.innerText = total
+
+        let totalExibir = document.getElementById('total')
+
+        totalExibir.innerText = total
 
 
         })
