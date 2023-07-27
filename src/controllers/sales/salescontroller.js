@@ -29,12 +29,24 @@ exports.saleproductservice = (req, res) => {
     const vendasProdutoTesteNome = dados.prodNome
     const vendasProdutoTesteQtd = dados.prodQtd
 
-
     console.log(dados)
-
     console.log(vendasProdutoTesteNome)
     console.log(vendasProdutoTesteQtd)
 
+
+    /*let obj = {nome: vendasProdutoTesteNome, qtd: vendasProdutoTesteQtd}
+    console.log('teste obj: ' + obj.nome)
+
+    for (let i in obj){
+
+    let vendasProdutoTesteNomeParm = obj.nome.vendasProdutoTesteNome[i]
+    let vendasProdutoTesteQtdParm = obj.qtd.vendasProdutoTesteQtd[i]
+
+    console.log(dados)
+    console.log(vendasProdutoTesteNome)
+    console.log(vendasProdutoTesteQtd)
+    console.log('teste nome: ' + obj.nome.vendasProdutoTesteNome[i])
+    console.log('teste Qtd: ' + obj.qtd.vendasProdutoTesteQtd[i])*/
 
     saleProductService(vendasProdutoTesteNome, vendasProdutoTesteQtd)
     .then(()=>{
@@ -43,6 +55,9 @@ exports.saleproductservice = (req, res) => {
         //error_msg = erros
         return res.redirect('/home')
     })
-}
+    }
+
+
+//}
 
 

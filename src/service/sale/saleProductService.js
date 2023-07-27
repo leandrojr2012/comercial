@@ -3,13 +3,10 @@ const db = require('../../db/dataBase')
 async function saleProductService(vendasProdutoTesteNome, vendasProdutoTesteQtd){
     return new Promise(async ( resolve, reject) =>{
 
-        let obj = {nome: vendasProdutoTesteNome, qtd: vendasProdutoTesteQtd}
+        for(let i in vendasProdutoTesteNome){
+            console.log('teste for: ' + vendasProdutoTesteNome[i])
 
-        for (let i in obj){
-            console.log('teste nome: ' + obj.nome.vendasProdutoTesteNome[i])
-            console.log('teste Qtd: ' + obj.qtd.vendasProdutoTesteQtd[i])
-
-            await db.insert({vendasProdutoTesteNome: obj.nome.vendasProdutoTesteNome[i], vendasProdutoTesteQtd: Number(obj.qtd.vendasProdutoTesteQtd[i])})
+            await db.insert({vendasProdutoTesteNome, vendasProdutoTesteQtd: Number(vendasProdutoTesteQtd)})
             .into("vendasprodutoteste")
             .then (data =>{
                 resolve()
@@ -17,7 +14,8 @@ async function saleProductService(vendasProdutoTesteNome, vendasProdutoTesteQtd)
                 console.log(err)
             })
         }
-    })
+    }
+    )
 }
 
 module.exports = saleProductService
